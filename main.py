@@ -7,6 +7,7 @@ from view.brick import *
 from view.grass import *
 from view.water import *
 from view.steel import *
+from util.utils import *
 
 # 初始化游戏界面
 pygame.init()
@@ -18,23 +19,16 @@ pygame.display.set_caption("坦克大战")
 ico = pygame.image.load('./img/camp.gif')
 pygame.display.set_icon(ico)
 
-# 创建对象
-tank = Tank(x=60,y=60,window=window)
-grass =Grass(x=100,y=100,window=window)
-water = Water(x=150,y=150,window=window)
-brick = Brick(x=200,y=200,window=window)
-steel = Steel(x=250,y=250,window=window)
-
-
+# 创建地图图片控件
+views = []
+# 创建地图
+Map(views,window)
 
 while True:
 
-    # 显示图片
-    tank.display()
-    grass.display()
-    water.display()
-    brick.display()
-    steel.display()
+    # 显示地图
+    for ele in views:
+        ele.display()
 
     # 刷新界面
     pygame.display.flip()
