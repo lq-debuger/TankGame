@@ -7,6 +7,11 @@ from util.local import *
 pygame.init()
 # 创建游戏窗口
 window = pygame.display.set_mode((13*SIZE,13*SIZE))
+# 设置标题
+pygame.display.set_caption("坦克大战")
+# 加载游戏图标
+ico = pygame.image.load('./img/camp.gif')
+pygame.display.set_icon(ico)
 
 
 
