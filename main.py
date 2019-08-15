@@ -2,11 +2,11 @@ import pygame
 from pygame.locals import *
 import sys
 from util.local import *
-from view.tank import *
-from view.brick import *
-from view.grass import *
-from view.water import *
-from view.steel import *
+# from view.tank import *
+# from view.brick import *
+# from view.grass import *
+# from view.water import *
+# from view.steel import *
 from util.utils import *
 
 # 初始化游戏界面
@@ -24,8 +24,13 @@ views = []
 # 创建地图
 Map(views,window)
 
+# 获取坦克
+tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
+
 while True:
 
+    # 清屏
+    window.fill((0,0,0))
     # 显示地图
     for ele in views:
         ele.display()
@@ -42,3 +47,15 @@ while True:
             pygame.quit()
             # 退出程序
             sys.exit()
+
+    # 捕获键盘按压列表
+    pressList = pygame.key.get_pressed()
+    if 1 in pressList:
+        if pressList[K_w] == 1:
+            tank.move(Direction.UP)
+        elif pressList[K_s] == 1:
+            tank.move(Direction.DOWN)
+        elif pressList[K_a] == 1:
+            tank.move(Direction.LEFT)
+        elif pressList[K_d] == 1:
+            tank.move(Direction.RIGHT)

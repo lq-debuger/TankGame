@@ -5,7 +5,6 @@ from view.steel import Steel
 from view.brick import Brick
 from view.water import Water
 
-import pygame
 
 
 def Map(views,window):
@@ -15,7 +14,7 @@ def Map(views,window):
     for row in range(0, len(fileList)):
         for line in range(0, len(fileList)):
             if fileList[row][line] == '主':
-                views.append(Tank(x=SIZE * line, y=SIZE * row, window=window))
+                views.append(Tank(x=SIZE * line, y=SIZE * row, window=window,direction = Direction.UP))
             elif fileList[row][line] == '草':
                 views.append(Grass(x=SIZE * line, y=SIZE * row, window=window))
             elif fileList[row][line] == '水':
