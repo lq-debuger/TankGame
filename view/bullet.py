@@ -1,8 +1,9 @@
 from base.view import *
 import pygame
 from util.local import *
+from base.autoMove import AutoMove
 
-class Bullet(Views):
+class Bullet(Views,AutoMove):
     """
     子弹类
     """
@@ -12,6 +13,9 @@ class Bullet(Views):
         self.image = pygame.image.load('./img/tankmissile.gif')
         self.width = self.image.get_width()
         self.height = self.image.get_height()
+
+        # 设置速度属性
+        self.speed = 2
 
         # 获取方向属性
         self.direction  = kwargs['direction']
@@ -34,3 +38,14 @@ class Bullet(Views):
         elif self.direction == Direction.DOWN:
             self.x = tank_x + tank_width/2 -self.width/2
             self.y = tank_y + tank_height
+
+    # 自动移动
+    def autoMove(self):
+        if self.direction == Direction.LEFT:
+            self.x -= self.speed
+        elif self.direction == Direction.RIGHT:
+            self.x += self.speed
+        elif self.direction == Direction.UP:
+            self.y -= self.speed
+        elif self.direction == Direction.DOWN:
+            self.y += self.speed

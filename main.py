@@ -10,6 +10,7 @@ from util.local import *
 from util.utils import *
 from base.move import MoveAble
 from base.block import BlockAble
+from base.autoMove import AutoMove
 
 # 初始化游戏界面
 pygame.init()
@@ -30,6 +31,11 @@ Map(views,window)
 tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
 
 while True:
+
+    # 检测所有自动移动的控件
+    autoList = list(filter(lambda view:isinstance(view,AutoMove),views))
+    for auto in autoList:
+        auto.autoMove()
 
     # 获取可移动控件
     moveList = list(filter(lambda view:isinstance(view,MoveAble),views))
