@@ -3,6 +3,7 @@ from util.local import *
 # from util.utils import *
 from base.move import MoveAble
 import pygame
+from view.bullet import *
 
 
 class Tank(Views,MoveAble):
@@ -22,6 +23,8 @@ class Tank(Views,MoveAble):
         self.comKey = 1
         # 设置碰撞参数
         self.coll = False
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
 
     def display(self):
         self.image = self.images[self.direction.value]
@@ -57,3 +60,8 @@ class Tank(Views,MoveAble):
 
     def notifyCollision(self):
         self.coll =True
+
+    # 发射子弹
+    def fire(self,views):
+        # 创建子弹对象
+        views.append(Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window))

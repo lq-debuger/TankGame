@@ -60,6 +60,10 @@ while True:
             pygame.quit()
             # 退出程序
             sys.exit()
+        # 按enter键发射子弹
+        elif eventEle.type == KEYDOWN:
+            if eventEle.key == K_RETURN:
+                tank.fire(views)
 
     # 捕获键盘按压列表
     pressList = pygame.key.get_pressed()
