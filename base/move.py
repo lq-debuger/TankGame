@@ -31,7 +31,10 @@ class MoveAble:
         # block矩形
         blockRect = pygame.Rect(block.x,block.y,SIZE,SIZE)
 
-        return tankRect.colliderect(blockRect)
+
+        # 同时对越界进行处理
+        return tankRect.colliderect(blockRect) or x <0 or y<0 or x> WIDTH-SIZE or y> HEIGHT - SIZE
+
 
     def notifyCollision(self):
         pass
