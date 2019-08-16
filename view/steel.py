@@ -1,5 +1,4 @@
-import pygame
-from view.base import *
+from base.view import *
 
 class Steel(Views):
 

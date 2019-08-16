@@ -6,6 +6,8 @@ class Views:
     方法： 显示display
     """
     def __init__(self,**kwargs):
+        # 设置排序参数
+        self.comKey = 2
         self.x = kwargs['x']
         self.y = kwargs['y']
         self.window = kwargs['window']

@@ -23,3 +23,5 @@ def Map(views,window):
                 views.append(Steel(x=SIZE * line, y=SIZE * row, window=window))
             elif fileList[row][line] == '砖':
                 views.append(Brick(x=SIZE * line, y=SIZE * row, window=window))
+    # 对views进行排序，以便能够使坦克隐藏在草丛
+    views.sort(key=lambda view:view.comKey)

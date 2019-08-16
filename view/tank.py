@@ -1,5 +1,4 @@
-import pygame
-from view.base import *
+from base.view import *
 from util.local import *
 # from util.utils import *
 
@@ -17,6 +16,8 @@ class Tank(Views):
         ]
         super(Tank, self).__init__(**kwargs,img='./img/p1tankU.gif')
         self.image = self.images[self.direction.value]
+        # 设置排序参数
+        self.comKey = 1
 
     def display(self):
         self.image = self.images[self.direction.value]
