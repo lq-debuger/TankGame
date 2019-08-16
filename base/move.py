@@ -33,7 +33,7 @@ class MoveAble:
 
 
         # 同时对越界进行处理
-        return tankRect.colliderect(blockRect) or x <0 or y<0 or x> WIDTH-SIZE or y> HEIGHT - SIZE
+        return tankRect.colliderect(blockRect) or x <0 or y<0 or x> WIDTH-self.width  or y> HEIGHT - self.height
 
 
     def notifyCollision(self):

@@ -11,6 +11,7 @@ from util.utils import *
 from base.move import MoveAble
 from base.block import BlockAble
 from base.autoMove import AutoMove
+from base.destry import DestroyAble
 
 # 初始化游戏界面
 pygame.init()
@@ -32,6 +33,14 @@ tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
 
 while True:
 
+    # 获取所有可以进行销毁的控件
+    destroyList = list(filter(lambda view:isinstance(view,DestroyAble),views))
+    # 判断是否要进行摧毁
+    for destroyView in destroyList:
+        if destroyView.needDestroy():
+            views.remove(destroyView)
+            del destroyView
+    print(len(views))
     # 检测所有自动移动的控件
     autoList = list(filter(lambda view:isinstance(view,AutoMove),views))
     for auto in autoList:
@@ -47,6 +56,7 @@ while True:
             colResult = move.hasCollision(block)
             if colResult:
                 move.notifyCollision()
+                break
 
     # 清屏
     window.fill((0,0,0))
