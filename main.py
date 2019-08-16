@@ -8,6 +8,8 @@ from util.local import *
 # from view.water import *
 # from view.steel import *
 from util.utils import *
+from base.move import MoveAble
+from base.block import BlockAble
 
 # 初始化游戏界面
 pygame.init()
@@ -28,6 +30,17 @@ Map(views,window)
 tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
 
 while True:
+
+    # 获取可移动控件
+    moveList = list(filter(lambda view:isinstance(view,MoveAble),views))
+    # 获取可阻挡控件
+    blockList = list(filter(lambda view:isinstance(view,BlockAble),views))
+    # 检测移动控件和阻挡控件是否发生了碰撞
+    for move in moveList:
+        for block in blockList:
+            colResult = move.hasCollision(block)
+            if colResult:
+                move.notifyCollision()
 
     # 清屏
     window.fill((0,0,0))

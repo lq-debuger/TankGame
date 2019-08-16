@@ -1,9 +1,11 @@
 from base.view import *
 from util.local import *
 # from util.utils import *
+from base.move import MoveAble
+import pygame
 
 
-class Tank(Views):
+class Tank(Views,MoveAble):
 
     def __init__(self,**kwargs):
         self.direction = kwargs['direction']
@@ -18,6 +20,8 @@ class Tank(Views):
         self.image = self.images[self.direction.value]
         # 设置排序参数
         self.comKey = 1
+        # 设置碰撞参数
+        self.coll = False
 
     def display(self):
         self.image = self.images[self.direction.value]
@@ -30,6 +34,11 @@ class Tank(Views):
             self.direction = direction
             return
 
+        if self.coll :
+            self.coll = False
+            return
+
+
         if direction == Direction.UP:
             self.y -= self.speed
         elif direction == Direction.DOWN:
@@ -38,3 +47,13 @@ class Tank(Views):
             self.x -= self.speed
         elif direction == Direction.RIGHT:
             self.x += self.speed
+
+    # # 碰撞检测
+    # def hasCollision(self, block):
+    #     tankRect = pygame.Rect(self.x,self.y,SIZE,SIZE)
+    #     blockRect = pygame.Rect(block.x,block.y,SIZE,SIZE)
+    #
+    #     return tankRect.colliderect(blockRect)
+
+    def notifyCollision(self):
+        self.coll =True
