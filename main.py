@@ -16,6 +16,8 @@ from base.suffer import SufferAble
 from base.attack import Attackable
 from view.boom import Boom
 from base.autofire import AutoFire
+from view.home import Home
+from util.gameover import *
 
 # 初始化游戏界面
 pygame.init()
@@ -34,8 +36,13 @@ Map(views,window)
 
 # 获取坦克
 tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
+# 获取老巢
+home = list(filter(lambda view:isinstance(view,Home),views))[0]
 
 while True:
+
+    # 判断游戏结束
+    gameOver(tank,home)
 
     # 获取可自动开火的控件
     autofireList = list(filter(lambda view:isinstance(view,AutoFire),views))
@@ -69,6 +76,7 @@ while True:
             if show:
                 views.append(show)
             views.remove(destroyView)
+
             del destroyView
 
     # 检测所有自动移动的控件
@@ -124,3 +132,4 @@ while True:
             tank.move(Direction.LEFT)
         elif pressList[K_d] == 1:
             tank.move(Direction.RIGHT)
+

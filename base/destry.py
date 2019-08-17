@@ -7,9 +7,9 @@ class DestroyAble:
     def needDestroy(self):
         pass
 
-    def showDestroy(self):
+
+    def showBoom(self):
         """
         显示挂掉的特效
         :return:
         """
-        pass
