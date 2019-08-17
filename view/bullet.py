@@ -7,8 +7,9 @@ from base.autoMove import AutoMove
 from base.destry import DestroyAble
 from base.attack import Attackable
 from view.boom import Boom
+from base.suffer import SufferAble
 
-class Bullet(Views,AutoMove,DestroyAble,Attackable):
+class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
     """
     子弹类
     """
@@ -79,8 +80,13 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable):
         # 子弹越界
         return  self.x <0 or self.y<0 or self.x> WIDTH  or self.y> HEIGHT  or self.shouldDestroy
 
-    def notifySuffer(self):
+    def notifyAttack(self):
         self.shouldDestroy = True
+
+    def notifySuffer(self,attack):
+        if attack.owner != self.owner:
+            self.shouldDestroy = True
+
 
     def showBoom(self):
         pass

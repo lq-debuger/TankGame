@@ -52,11 +52,12 @@ while True:
     for attack in attackList:
         for suffer in sufferList:
             # 检测是否发生碰撞
-            coll = attack.hasCollision(suffer)
-            if coll :
-                attack.notifySuffer()
-                suffer.notifySuffer(attack)
-                break
+            if attack != suffer:
+                coll = attack.hasCollision(suffer)
+                if coll :
+                    attack.notifyAttack()
+                    suffer.notifySuffer(attack)
+                    break
 
     # 获取所有可以进行销毁的控件
     destroyList = list(filter(lambda view:isinstance(view,DestroyAble),views))

@@ -15,7 +15,7 @@ class Attackable:
 
         pass
 
-    def notifySuffer(self):
+    def notifyAttack(self):
         """
         通知攻击控件攻击到了物体
         :return:
