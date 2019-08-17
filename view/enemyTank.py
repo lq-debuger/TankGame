@@ -40,9 +40,7 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble):
         self.x = kwargs['x']
         self.y = kwargs['y']
 
-        # 获取中心变量
-        self.center_x = self.x + self.width / 2
-        self.center_y = self.y + self.height / 2
+
 
         # 设置敌机的血量
         self.hp = 3
@@ -135,9 +133,11 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble):
         是否显示爆炸的特效
         :return:
         """
-        pass
-        # if self.shouldDestroy:
-        #     return Boom(center_x=self.center_x, center_y=self.center_y, window=self.window)
+        # 获取中心变量
+        self.center_x = self.x + self.width / 2
+        self.center_y = self.y + self.height / 2
+        if self.shouldDestroy:
+            return Boom(center_x=self.center_x, center_y=self.center_y, window=self.window)
 
     def notifyCollision(self):
         self.coll = True

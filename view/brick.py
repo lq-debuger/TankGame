@@ -17,11 +17,9 @@ class Brick(Views,BlockAble,SufferAble,DestroyAble):
         # 设置销毁状态
         self.shouldDestroy = False
 
-        # 获取中心变量
-        self.center_x = self.x + self.width/2
-        self.center_y = self.y + self.height/2
 
-    def notifySuffer(self):
+
+    def notifySuffer(self,attack):
         self.hp -= 1
 
     def needDestroy(self):
@@ -34,5 +32,10 @@ class Brick(Views,BlockAble,SufferAble,DestroyAble):
         是否显示爆炸的特效
         :return:
         """
+        # 获取中心变量
+        self.center_x = self.x + self.width / 2
+        self.center_y = self.y + self.height / 2
         if self.shouldDestroy:
             return Boom(center_x=self.center_x,center_y=self.center_y,window=self.window)
+
+
