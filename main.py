@@ -14,6 +14,7 @@ from base.autoMove import AutoMove
 from base.destry import DestroyAble
 from base.suffer import SufferAble
 from base.attack import Attackable
+from view.boom import Boom
 
 # 初始化游戏界面
 pygame.init()
@@ -54,6 +55,10 @@ while True:
     # 判断是否要进行摧毁
     for destroyView in destroyList:
         if destroyView.needDestroy():
+            # 判断是都需要挂掉的特效
+            show = destroyView.showBoom()
+            if show:
+                views.append(show)
             views.remove(destroyView)
             del destroyView
     print(len(views))

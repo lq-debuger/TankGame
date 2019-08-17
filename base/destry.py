@@ -6,3 +6,10 @@ class DestroyAble:
     """
     def needDestroy(self):
         pass
+
+    def showDestroy(self):
+        """
+        显示挂掉的特效
+        :return:
+        """
+        pass

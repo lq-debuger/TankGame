@@ -6,6 +6,7 @@ from base.autoMove import AutoMove
 # from base.destry import DestroyAble
 from base.destry import DestroyAble
 from base.attack import Attackable
+from view.boom import Boom
 
 class Bullet(Views,AutoMove,DestroyAble,Attackable):
     """
@@ -77,3 +78,6 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable):
 
     def notifySuffer(self):
         self.shouldDestroy = True
+
+    def showBoom(self):
+        pass
