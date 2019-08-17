@@ -63,9 +63,9 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable):
     # 进行碰撞处理和越界
     def hasCollision(self,suffer):
         # 子弹矩形
-        bulletRect = pygame.Rect(self.x,self.y,SIZE,SIZE)
+        bulletRect = pygame.Rect(self.x,self.y,self.width,self.height)
         # block矩形
-        sufferRect = pygame.Rect(suffer.x,suffer.y,SIZE,SIZE)
+        sufferRect = pygame.Rect(suffer.x,suffer.y,suffer.width,suffer.height)
 
         # 同时对越界进行处理
         return bulletRect.colliderect(sufferRect)
