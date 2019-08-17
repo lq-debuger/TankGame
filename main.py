@@ -82,6 +82,8 @@ while True:
     # 检测移动控件和阻挡控件是否发生了碰撞
     for move in moveList:
         for block in blockList:
+            if move == block:
+                continue
             colResult = move.hasCollision(block)
             if colResult:
                 move.notifyCollision()

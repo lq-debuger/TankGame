@@ -6,8 +6,9 @@ import pygame
 from view.bullet import *
 from base.suffer import SufferAble
 from base.destry import DestroyAble
+from base.block import BlockAble
 
-class Tank(Views,MoveAble,SufferAble,DestroyAble):
+class Tank(Views,MoveAble,SufferAble,DestroyAble,BlockAble):
 
     def __init__(self,**kwargs):
         self.direction = kwargs['direction']
@@ -84,4 +85,3 @@ class Tank(Views,MoveAble,SufferAble,DestroyAble):
 
     def showBoom(self):
         pass
-    

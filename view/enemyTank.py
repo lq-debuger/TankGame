@@ -12,6 +12,7 @@ from util.local import *
 from base.destry import DestroyAble
 from base.suffer import SufferAble
 from view.boom import Boom
+from base.move import MoveAble
 
 class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble):
     """
@@ -52,6 +53,8 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble):
         # 发射子弹的时间间隔
         self.time = time.time()
         # 设置碰撞参数
+        self.coll = False
+        # 设置碰撞属性
         self.coll = False
         self.width = self.image.get_width()
         self.height = self.image.get_height()
@@ -133,3 +136,6 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble):
         pass
         # if self.shouldDestroy:
         #     return Boom(center_x=self.center_x, center_y=self.center_y, window=self.window)
+
+    def notifyCollision(self):
+        self.coll = True

@@ -27,9 +27,9 @@ class MoveAble:
             x += self.speed
 
         # 坦克矩形
-        selfRect = pygame.Rect(x,y,SIZE,SIZE)
+        selfRect = pygame.Rect(x,y,self.width,self.height)
         # block矩形
-        blockRect = pygame.Rect(block.x,block.y,SIZE,SIZE)
+        blockRect = pygame.Rect(block.x,block.y,block.width,block.height)
 
 
         # 同时对越界进行处理
