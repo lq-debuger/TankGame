@@ -2,11 +2,12 @@ from base.view import *
 import pygame
 from util.local import *
 from base.autoMove import AutoMove
-from base.move import MoveAble
+# from base.move import MoveAble
+# from base.destry import DestroyAble
 from base.destry import DestroyAble
-from base.destry import DestroyAble
+from base.attack import Attackable
 
-class Bullet(Views,AutoMove,MoveAble,DestroyAble):
+class Bullet(Views,AutoMove,DestroyAble,Attackable):
     """
     子弹类
     """
@@ -21,7 +22,8 @@ class Bullet(Views,AutoMove,MoveAble,DestroyAble):
         self.speed = 2
 
         # 设置销毁属性
-        self.destroy =False
+        self.shouldDestroy =False
+
 
         # 获取方向属性
         self.direction  = kwargs['direction']
@@ -59,16 +61,19 @@ class Bullet(Views,AutoMove,MoveAble,DestroyAble):
             self.y += self.speed
 
     # 进行碰撞处理和越界
-    def hasCollision(self,block):
+    def hasCollision(self,suffer):
         # 子弹矩形
         bulletRect = pygame.Rect(self.x,self.y,SIZE,SIZE)
         # block矩形
-        blockRect = pygame.Rect(block.x,block.y,SIZE,SIZE)
+        sufferRect = pygame.Rect(suffer.x,suffer.y,SIZE,SIZE)
 
         # 同时对越界进行处理
-        return bulletRect.colliderect(blockRect)
+        return bulletRect.colliderect(sufferRect)
 
 
     def needDestroy(self):
         # 子弹越界
-        return  self.x <0 or self.y<0 or self.x> WIDTH  or self.y> HEIGHT
+        return  self.x <0 or self.y<0 or self.x> WIDTH  or self.y> HEIGHT  or self.shouldDestroy
+
+    def notifySuffer(self):
+        self.shouldDestroy = True

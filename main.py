@@ -12,6 +12,8 @@ from base.move import MoveAble
 from base.block import BlockAble
 from base.autoMove import AutoMove
 from base.destry import DestroyAble
+from base.suffer import SufferAble
+from base.attack import Attackable
 
 # 初始化游戏界面
 pygame.init()
@@ -32,6 +34,20 @@ Map(views,window)
 tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
 
 while True:
+
+    # 获取可以攻击的控件
+    attackList = list(filter(lambda view:isinstance(view,Attackable),views))
+    # 获取遭受攻击的控件
+    sufferList = list(filter(lambda view:isinstance(view,SufferAble),views))
+    # 判断是否受到攻击
+    for attack in attackList:
+        for suffer in sufferList:
+            # 检测是否发生碰撞
+            coll = attack.hasCollision(suffer)
+            if coll :
+                attack.notifySuffer()
+                suffer.notifySuffer()
+                break
 
     # 获取所有可以进行销毁的控件
     destroyList = list(filter(lambda view:isinstance(view,DestroyAble),views))
