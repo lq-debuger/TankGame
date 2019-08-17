@@ -1,17 +1,22 @@
+import time
+import random
 import pygame
 from base.view import Views
 from base.autoMove import AutoMove
 from util.local import *
 from base.autoMove import AutoMove
 from base.move import MoveAble
+from base.autofire import AutoFire
+from view.bullet import Bullet
+from util.local import *
 
-class EnemyTank(Views,AutoMove,MoveAble):
+class EnemyTank(Views,AutoMove,MoveAble,AutoFire):
     """
     敌方坦克类
     """
     def __init__(self,**kwargs):
         self.direction = kwargs['direction']
-        self.speed = 1
+        self.speed = 0.3
         self.images = [
             pygame.image.load('./img/p2tankL.gif'),
             pygame.image.load('./img/p2tankR.gif'),
@@ -23,15 +28,44 @@ class EnemyTank(Views,AutoMove,MoveAble):
         self.image = self.images[self.direction.value]
         # 设置排序参数
         self.comKey = 1
+        # 发射子弹的时间间隔
+        self.time = time.time()
         # 设置碰撞参数
         self.coll = False
         self.width = self.image.get_width()
         self.height = self.image.get_height()
 
-    def autoMove(self):
+    # def display(self):
+    #     self.image = self.image[self.direction.value]
+    #     super(EnemyTank, self).display(self.image,(self.x,self,y))
 
+    def randDirection(self,direction):
+        """
+        随机碰撞后的方向
+        :return:
+        """
+        index = random.randint(0,3)
+        if index == 0:
+            newDirection = Direction.LEFT
+        elif index == 1:
+            newDirection = Direction.RIGHT
+        elif index == 2:
+            newDirection = Direction.UP
+        elif index == 3:
+            newDirection = Direction.DOWN
+
+        if self.direction == newDirection:
+            return self.randDirection(direction)
+        else:
+            return newDirection
+
+
+    def autoMove(self):
+        # 如果发生了碰撞，就随机改变方向
         if self.coll :
-            return 
+            self.coll = False
+            self.direction = self.randDirection(self.direction)
+            return
 
         if self.direction == Direction.LEFT:
             self.x -= self.speed
@@ -42,6 +76,22 @@ class EnemyTank(Views,AutoMove,MoveAble):
         elif self.direction == Direction.DOWN:
             self.y += self.speed
 
+    def display(self):
+        self.image = self.images[self.direction.value]
+        self.window.blit(self.image,(self.x,self.y))
+
     def notifyCollision(self):
         self.coll =True
 
+    def autoFire(self):
+        """
+        控制发射频率 一秒一次
+        :return:
+        """
+        curtime = time.time()
+        offset = curtime - self.time
+        #
+        if offset > 1:
+            self.time = curtime
+
+            return Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window)

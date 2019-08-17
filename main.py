@@ -15,6 +15,7 @@ from base.destry import DestroyAble
 from base.suffer import SufferAble
 from base.attack import Attackable
 from view.boom import Boom
+from base.autofire import AutoFire
 
 # 初始化游戏界面
 pygame.init()
@@ -35,6 +36,13 @@ Map(views,window)
 tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
 
 while True:
+
+    # 获取可自动开火的控件
+    autofireList = list(filter(lambda view:isinstance(view,AutoFire),views))
+    for autofire in autofireList:
+        bullet = autofire.autoFire()
+        if bullet:
+            views.append(bullet)
 
     # 获取可以攻击的控件
     attackList = list(filter(lambda view:isinstance(view,Attackable),views))
@@ -61,7 +69,7 @@ while True:
                 views.append(show)
             views.remove(destroyView)
             del destroyView
-    print(len(views))
+
     # 检测所有自动移动的控件
     autoList = list(filter(lambda view:isinstance(view,AutoMove),views))
     for auto in autoList:

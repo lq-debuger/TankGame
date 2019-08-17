@@ -20,7 +20,7 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable):
         self.height = self.image.get_height()
 
         # 设置速度属性
-        self.speed = 2
+        self.speed =1.5
 
         # 设置销毁属性
         self.shouldDestroy =False
