@@ -83,6 +83,7 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
     def notifyAttack(self):
         self.shouldDestroy = True
 
+    # 如果是敌我子弹的话就抵消
     def notifySuffer(self,attack):
         if attack.owner != self.owner:
             self.shouldDestroy = True

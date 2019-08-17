@@ -13,8 +13,9 @@ from base.destry import DestroyAble
 from base.suffer import SufferAble
 from view.boom import Boom
 from base.move import MoveAble
+from base.block import BlockAble
 
-class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble):
+class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAble):
     """
     敌方坦克类
     """
