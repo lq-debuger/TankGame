@@ -19,6 +19,9 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable):
         self.width = self.image.get_width()
         self.height = self.image.get_height()
 
+        # 设置拥有者属性
+        self.owner = kwargs['owner']
+
         # 设置速度属性
         self.speed =1.5
 

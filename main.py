@@ -55,7 +55,7 @@ while True:
             coll = attack.hasCollision(suffer)
             if coll :
                 attack.notifySuffer()
-                suffer.notifySuffer()
+                suffer.notifySuffer(attack)
                 break
 
     # 获取所有可以进行销毁的控件

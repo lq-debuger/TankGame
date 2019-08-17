@@ -118,10 +118,12 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble):
         if offset > 1:
             self.time = curtime
 
-            return Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window)
+            return Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window,owner=self)
 
-    def notifySuffer(self):
-        self.hp -= 1
+    def notifySuffer(self,attack):
+        if not isinstance(attack.owner,EnemyTank):
+            self.hp -= 1
+
 
     def needDestroy(self):
         if self.hp <= 0:

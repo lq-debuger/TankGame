@@ -70,10 +70,11 @@ class Tank(Views,MoveAble,SufferAble,DestroyAble,BlockAble):
     # 发射子弹
     def fire(self,views):
         # 创建子弹对象
-        views.append(Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window))
+        views.append(Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window,owner=self))
 
-    def notifySuffer(self):
-        self.hp -= 1
+    def notifySuffer(self,attack):
+        if not isinstance(attack.owner,Tank):
+            self.hp -= 1
 
     def needDestroy(self):
         if self.hp <= 0 :
