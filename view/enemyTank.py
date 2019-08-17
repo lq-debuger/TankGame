@@ -9,8 +9,11 @@ from base.move import MoveAble
 from base.autofire import AutoFire
 from view.bullet import Bullet
 from util.local import *
+from base.destry import DestroyAble
+from base.suffer import SufferAble
+from view.boom import Boom
 
-class EnemyTank(Views,AutoMove,MoveAble,AutoFire):
+class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble):
     """
     敌方坦克类
     """
@@ -23,9 +26,27 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire):
             pygame.image.load('./img/p2tankU.gif'),
             pygame.image.load('./img/p2tankD.gif')
         ]
-        super(EnemyTank, self).__init__(**kwargs,img='./img/p1tankD.gif')
+        # super(EnemyTank, self).__init__(**kwargs,img='./img/p1tankD.gif')
+        self.image = pygame.image.load('./img/p1tankD.gif')
+        self.window = kwargs['window']
+
         self.speed = 0.3
         self.image = self.images[self.direction.value]
+
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
+
+        self.x = kwargs['x']
+        self.y = kwargs['y']
+
+        # 获取中心变量
+        self.center_x = self.x + self.width / 2
+        self.center_y = self.y + self.height / 2
+
+        # 设置敌机的血量
+        self.hp = 3
+        # 设置销毁属性
+        self.shouldDestroy = False
         # 设置排序参数
         self.comKey = 1
         # 发射子弹的时间间隔
@@ -95,3 +116,20 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire):
             self.time = curtime
 
             return Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window)
+
+    def notifySuffer(self):
+        self.hp -= 1
+
+    def needDestroy(self):
+        if self.hp <= 0:
+            self.shouldDestroy = True
+            return  self.shouldDestroy
+
+    def showBoom(self):
+        """
+        是否显示爆炸的特效
+        :return:
+        """
+        pass
+        # if self.shouldDestroy:
+        #     return Boom(center_x=self.center_x, center_y=self.center_y, window=self.window)
