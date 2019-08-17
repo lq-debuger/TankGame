@@ -4,9 +4,10 @@ from util.local import *
 from base.move import MoveAble
 import pygame
 from view.bullet import *
+from base.suffer import SufferAble
+from base.destry import DestroyAble
 
-
-class Tank(Views,MoveAble):
+class Tank(Views,MoveAble,SufferAble,DestroyAble):
 
     def __init__(self,**kwargs):
         self.direction = kwargs['direction']
@@ -21,6 +22,10 @@ class Tank(Views,MoveAble):
         self.image = self.images[self.direction.value]
         # 设置排序参数
         self.comKey = 1
+        # 设置血量
+        self.hp = 5
+        # 设置销毁参数
+        self.shouldDestroy = False
         # 设置碰撞参数
         self.coll = False
         self.width = self.image.get_width()
@@ -65,3 +70,18 @@ class Tank(Views,MoveAble):
     def fire(self,views):
         # 创建子弹对象
         views.append(Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window))
+
+    def notifySuffer(self):
+        self.hp -= 1
+
+    def needDestroy(self):
+        if self.hp <= 0 :
+            self.shouldDestroy = True
+            return self.shouldDestroy
+
+    def showDestroy(self):
+        pass
+
+    def showBoom(self):
+        pass
+    
