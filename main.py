@@ -44,6 +44,9 @@ enemyList = list(filter(lambda view:isinstance(view,Home),views))
 font = pygame.font.Font('./font/happy.ttf', 60)
 text = font.render('GAME OVER', True, (255, 0, 0))
 
+# 加载发射子弹的音效
+fire_snd = pygame.mixer.Sound('./snd/fire.wav')
+
 # fps= 0
 while True:
 
@@ -149,7 +152,10 @@ while True:
             # 按enter键发射子弹
             elif eventEle.type == KEYDOWN:
                 if eventEle.key == K_RETURN:
+                    # 播放发射子弹时的音效
+                    fire_snd.play(0)
                     tank.fire(views)
+
 
         # 捕获键盘按压列表
         pressList = pygame.key.get_pressed()
