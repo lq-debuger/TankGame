@@ -164,7 +164,7 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAbl
             self.x = 6* SIZE
             self.y = 0
         elif l == 2:
-            self.x = 13 * SIZE
+            self.x = 12 * SIZE
             self.y = 0
         for enemy in enemyList:
             if enemy.x == self.x and enemy.y == self.y:

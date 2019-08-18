@@ -12,7 +12,7 @@ class Tank(Views,MoveAble,SufferAble,DestroyAble,BlockAble):
 
     def __init__(self,**kwargs):
         self.direction = kwargs['direction']
-        self.speed = 2
+        self.speed = 10
         self.images = [
             pygame.image.load('./img/p1tankL.gif'),
             pygame.image.load('./img/p1tankR.gif'),
@@ -24,7 +24,7 @@ class Tank(Views,MoveAble,SufferAble,DestroyAble,BlockAble):
         # 设置排序参数
         self.comKey = 1
         # 设置血量
-        self.hp = 5
+        self.hp = 20
         # 设置销毁参数
         self.shouldDestroy = False
         # 设置碰撞参数
