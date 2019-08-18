@@ -32,13 +32,13 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAbl
         self.direction = kwargs['direction']
         self.speed = 0.5
         self.images = [
-            pygame.image.load('./img/p2tankL.gif'),
-            pygame.image.load('./img/p2tankR.gif'),
-            pygame.image.load('./img/p2tankU.gif'),
-            pygame.image.load('./img/p2tankD.gif')
+            pygame.image.load('../img/p2tankL.gif'),
+            pygame.image.load('../img/p2tankR.gif'),
+            pygame.image.load('../img/p2tankU.gif'),
+            pygame.image.load('../img/p2tankD.gif')
         ]
         # super(EnemyTank, self).__init__(**kwargs,img='./img/p1tankD.gif')
-        self.image = pygame.image.load('./img/p1tankD.gif')
+        self.image = pygame.image.load('../img/p1tankD.gif')
         self.window = kwargs['window']
 
         self.speed = 1

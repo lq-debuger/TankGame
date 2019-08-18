@@ -15,7 +15,7 @@ class Boom(Views,DestroyAble):
         self.total = 32
         center_x = kwargs['center_x']
         center_y = kwargs['center_y']
-        self.image = pygame.image.load('./img/blast_{}.png'.format(self.index))
+        self.image = pygame.image.load('../img/blast_{}.png'.format(self.index))
         self.wiidth = self.image.get_width()
         self.height = self.image.get_height()
 
@@ -26,7 +26,7 @@ class Boom(Views,DestroyAble):
         self.comKey = 2
 
     def display(self):
-        self.image = pygame.image.load('./img/blast_{}.png'.format(self.index))
+        self.image = pygame.image.load('../img/blast_{}.png'.format(self.index))
         super(Boom, self).display()
 
         if self.index < self.total:

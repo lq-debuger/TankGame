@@ -10,14 +10,14 @@ def page1():
     # 设置标题
     pygame.display.set_caption("坦克大战")
     # 加载游戏图标
-    ico = pygame.image.load('../img/camp.gif')
+    ico = pygame.image.load('./img/camp.gif')
     pygame.display.set_icon(ico)
 
     # 创建标题字体
-    font1 = pygame.font.Font('../font/happy.ttf', 100)
+    font1 = pygame.font.Font('./font/happy.ttf', 100)
     text1 = font1.render('坦克大战',True,(255,0,0))
     # 创建选项字体
-    font1 = pygame.font.Font('../font/happy.ttf', 40)
+    font1 = pygame.font.Font('./font/happy.ttf', 40)
     text2 = font1.render('1.单人游戏', True, (0, 255, 0))
     text3 = font1.render('2.双人游戏(暂无)', True, (0, 255, 0))
 

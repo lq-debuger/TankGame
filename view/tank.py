@@ -14,12 +14,12 @@ class Tank(Views,MoveAble,SufferAble,DestroyAble,BlockAble):
         self.direction = kwargs['direction']
         self.speed = 10
         self.images = [
-            pygame.image.load('./img/p1tankL.gif'),
-            pygame.image.load('./img/p1tankR.gif'),
-            pygame.image.load('./img/p1tankU.gif'),
-            pygame.image.load('./img/p1tankD.gif')
+            pygame.image.load('../img/p1tankL.gif'),
+            pygame.image.load('../img/p1tankR.gif'),
+            pygame.image.load('../img/p1tankU.gif'),
+            pygame.image.load('../img/p1tankD.gif')
         ]
-        super(Tank, self).__init__(**kwargs,img='./img/p1tankU.gif')
+        super(Tank, self).__init__(**kwargs,img='../img/p1tankU.gif')
         self.image = self.images[self.direction.value]
         # 设置排序参数
         self.comKey = 1

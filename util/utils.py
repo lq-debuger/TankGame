@@ -11,7 +11,7 @@ from view.smallbrick import SmallBrick
 
 def Map(views,window):
     # 解析地图
-    f = open('./map/1.map', encoding='utf-8')
+    f = open('../map/1.map', encoding='utf-8')
     fileList = f.readlines()
     for row in range(0, len(fileList)):
         lineStr = fileList[row]

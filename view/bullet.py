@@ -17,7 +17,8 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
     def __init__(self,**kwargs):
         
         self.window = kwargs['window']
-        self.image = pygame.image.load('./img/tankmissile.gif')
+        self.image = pygame.image.load('..'
+                                       '/img/tankmissile.gif')
         self.width = self.image.get_width()
         self.height = self.image.get_height()
         self.type = kwargs['type']
@@ -98,7 +99,7 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
         # 加载hit音效
         if attack.type == TankType.User:
 
-            hit_snd = pygame.mixer.Sound('./snd/hit.wav')
+            hit_snd = pygame.mixer.Sound('../snd/hit.wav')
             hit_snd.play(0)
         # if not isinstance(self.owner,Tank):
         # if self.owner != suffer or (isinstance(suffer,Bullet) and type(self.owner)!=type(suffer.owner)):

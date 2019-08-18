@@ -8,8 +8,8 @@ from view.boom import Boom
 class Brick(Views,BlockAble,SufferAble,DestroyAble):
 
     def __init__(self,**kwargs):
-        super(Brick, self).__init__(**kwargs,img='./img/walls.gif')
-        self.image = pygame.image.load('./img/walls.gif')
+        super(Brick, self).__init__(**kwargs,img='../img/walls.gif')
+        self.image = pygame.image.load('../img/walls.gif')
         self.width = self.image.get_width()
         self.height = self.image.get_height()
         # 设置血量值
