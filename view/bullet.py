@@ -92,7 +92,12 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
         # 子弹越界
         return  self.x <0 or self.y<0 or self.x> WIDTH  or self.y> HEIGHT  or self.shouldDestroy
 
-    def notifyAttack(self,suffer):
+    def notifyAttack(self,suffer,attack):
+        # 加载hit音效
+        if attack.type == TankType.User:
+
+            hit_snd = pygame.mixer.Sound('./snd/hit.wav')
+            hit_snd.play(0)
         # if not isinstance(self.owner,Tank):
         # if self.owner != suffer or (isinstance(suffer,Bullet) and type(self.owner)!=type(suffer.owner)):
         self.shouldDestroy = True

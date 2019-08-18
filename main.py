@@ -84,7 +84,7 @@ while True:
                     print(1)
                     coll = attack.hasCollision(suffer)
                     if coll :
-                        attack.notifyAttack(suffer)
+                        attack.notifyAttack(suffer,attack)
                         suffer.notifySuffer(attack)
                         break
 
