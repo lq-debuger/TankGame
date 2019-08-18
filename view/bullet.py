@@ -31,6 +31,8 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
         # 设置销毁属性
         self.shouldDestroy =False
 
+        self.comKey = 2
+
 
         # 获取方向属性
         self.direction  = kwargs['direction']

@@ -44,11 +44,15 @@ enemyList = list(filter(lambda view:isinstance(view,Home),views))
 font = pygame.font.Font('./font/happy.ttf', 60)
 text = font.render('GAME OVER', True, (255, 0, 0))
 
+# 加载背景音效
+pygame.mixer_music.load('./snd/start.wav')
 # 加载发射子弹的音效
 fire_snd = pygame.mixer.Sound('./snd/fire.wav')
 
 # fps= 0
 while True:
+    # 播放背景音乐
+    pygame.mixer_music.play()
 
     # starttime = time.time()
     # print(fps)
@@ -104,6 +108,7 @@ while True:
                 views.remove(destroyView)
                 if isinstance(destroyView,EnemyTank):
                     destroyView.reset(enemyList,views)
+                    views.sort(key=lambda view: view.comKey)
                     continue
                 del destroyView
                 # 判断敌机是否需要重置

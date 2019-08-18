@@ -23,6 +23,7 @@ class Boom(Views,DestroyAble):
         self.y = center_y - self.height/2
 
         self.window = kwargs['window']
+        self.comKey = 2
 
     def display(self):
         self.image = pygame.image.load('./img/blast_{}.png'.format(self.index))
