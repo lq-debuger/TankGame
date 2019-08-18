@@ -2,11 +2,6 @@ import pygame
 from pygame.locals import *
 import sys
 from util.local import *
-# from view.tank import *
-# from view.brick import *
-# from view.grass import *
-# from view.water import *
-# from view.steel import *
 from util.utils import *
 from base.move import MoveAble
 from base.block import BlockAble
@@ -43,7 +38,7 @@ home = list(filter(lambda view:isinstance(view,Home),views))[0]
 
 # 创建游戏结束的文字
 font = pygame.font.Font('./font/happy.ttf', 60)
-text = font.render('游戏结束', True, (255, 0, 0))
+text = font.render('GAME OVER', True, (255, 0, 0))
 
 # fps= 0
 while True:
@@ -159,17 +154,10 @@ while True:
                 tank.move(Direction.LEFT)
             elif pressList[K_d] == 1:
                 tank.move(Direction.RIGHT)
-            # if pressList[K_RETURN] == 1:
-            #     tank.fire(views)
 
-        # endtime = time.time()
-        # offset = endtime - starttime
-        #
-        # fps = 1 / offset
-        # # print(fps)
     else:
         # 打印游戏结束的文字
-        window.blit(text, (WIDTH / 2 - 100, HEIGHT / 2))
+        window.fill((0,0,0))
+        window.blit(text, (WIDTH / 2- 160, HEIGHT / 2))
         pygame.display.flip()
-        # print('游戏结束')
         continue
