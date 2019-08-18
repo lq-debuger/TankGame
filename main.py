@@ -95,8 +95,12 @@ while True:
             if destroyView.needDestroy():
                 # 判断是都需要挂掉的特效
                 show = destroyView.showBoom()
+
                 if show:
                     views.append(show)
+                    # 加载爆炸音效
+                    blast_snd = pygame.mixer.Sound('./snd/blast.wav')
+                    blast_snd.play(0)
                 views.remove(destroyView)
                 if isinstance(destroyView,EnemyTank):
                     destroyView.reset(enemyList,views)
