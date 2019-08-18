@@ -1,7 +1,7 @@
 import time
 import random
 import pygame
-from base.view import Views
+from base.view import Views, TankType
 from base.autoMove import AutoMove
 from util.local import *
 from base.autoMove import AutoMove
@@ -21,7 +21,7 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAbl
     """
     def __init__(self,**kwargs):
         self.direction = kwargs['direction']
-        self.speed = 0.3
+        self.speed = 0.5
         self.images = [
             pygame.image.load('./img/p2tankL.gif'),
             pygame.image.load('./img/p2tankR.gif'),
@@ -32,7 +32,7 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAbl
         self.image = pygame.image.load('./img/p1tankD.gif')
         self.window = kwargs['window']
 
-        self.speed = 0.3
+        self.speed = 1
         self.image = self.images[self.direction.value]
 
         self.width = self.image.get_width()
@@ -41,6 +41,8 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAbl
         self.x = kwargs['x']
         self.y = kwargs['y']
 
+        # 设置当前类别
+        self.type = TankType.Enemy
 
 
         # 设置敌机的血量
@@ -117,7 +119,7 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAbl
         if offset > 1:
             self.time = curtime
 
-            return Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window,owner=self)
+            return Bullet(type=self.type, tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window,owner=2)
 
     def notifySuffer(self,attack):
         if not isinstance(attack.owner,EnemyTank):

@@ -12,7 +12,7 @@ class Tank(Views,MoveAble,SufferAble,DestroyAble,BlockAble):
 
     def __init__(self,**kwargs):
         self.direction = kwargs['direction']
-        self.speed = 1
+        self.speed = 2
         self.images = [
             pygame.image.load('./img/p1tankL.gif'),
             pygame.image.load('./img/p1tankR.gif'),
@@ -31,6 +31,9 @@ class Tank(Views,MoveAble,SufferAble,DestroyAble,BlockAble):
         self.coll = False
         self.width = self.image.get_width()
         self.height = self.image.get_height()
+
+        # 设置当前类别
+        self.type = TankType.User
 
     def display(self):
         self.image = self.images[self.direction.value]
@@ -70,8 +73,8 @@ class Tank(Views,MoveAble,SufferAble,DestroyAble,BlockAble):
     # 发射子弹
     def fire(self,views):
         # 创建子弹对象
-        views.append(Bullet(tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window,owner=self))
-
+        views.append(Bullet(type=self.type,tank_x=self.x,tank_y=self.y,tank_height=self.height,tank_width=self.width,direction=self.direction,window=self.window,owner=1))
+        print("发生了")
     def notifySuffer(self,attack):
         if not isinstance(attack.owner,Tank):
             self.hp -= 1

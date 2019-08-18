@@ -8,6 +8,7 @@ from base.destry import DestroyAble
 from base.attack import Attackable
 from view.boom import Boom
 from base.suffer import SufferAble
+# from base.block import BlockAble
 
 class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
     """
@@ -19,12 +20,13 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
         self.image = pygame.image.load('./img/tankmissile.gif')
         self.width = self.image.get_width()
         self.height = self.image.get_height()
+        self.type = kwargs['type']
 
         # 设置拥有者属性
-        self.owner = kwargs['owner']
+        self.owner =0
 
         # 设置速度属性
-        self.speed =1.5
+        self.speed =3
 
         # 设置销毁属性
         self.shouldDestroy =False
@@ -67,6 +69,11 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
 
     # 进行碰撞处理和越界
     def hasCollision(self,suffer):
+
+        if self.type == suffer.type:
+            return
+        # if self.owner==1:
+        #     return False
         # 子弹矩形
         bulletRect = pygame.Rect(self.x,self.y,self.width,self.height)
         # block矩形
@@ -74,13 +81,20 @@ class Bullet(Views,AutoMove,DestroyAble,Attackable,SufferAble):
 
         # 同时对越界进行处理
         return bulletRect.colliderect(sufferRect)
+        # if a:
+        #     print(sufferRect)
+        #     print(bulletRect)
+        # return a
+
 
 
     def needDestroy(self):
         # 子弹越界
         return  self.x <0 or self.y<0 or self.x> WIDTH  or self.y> HEIGHT  or self.shouldDestroy
 
-    def notifyAttack(self):
+    def notifyAttack(self,suffer):
+        # if not isinstance(self.owner,Tank):
+        # if self.owner != suffer or (isinstance(suffer,Bullet) and type(self.owner)!=type(suffer.owner)):
         self.shouldDestroy = True
 
     # 如果是敌我子弹的话就抵消
