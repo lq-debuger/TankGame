@@ -41,6 +41,10 @@ tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
 # 获取老巢
 home = list(filter(lambda view:isinstance(view,Home),views))[0]
 
+# 创建游戏结束的文字
+font = pygame.font.Font('./font/happy.ttf', 60)
+text = font.render('游戏结束', True, (255, 0, 0))
+
 # fps= 0
 while True:
 
@@ -87,6 +91,9 @@ while True:
         # 判断是否要进行摧毁
         for destroyView in destroyList:
             if destroyView.needDestroy():
+                # if isinstance(destroyView,EnemyTank):
+                #     destroyView.reset()
+                #     continue
                 # 判断是都需要挂掉的特效
                 show = destroyView.showBoom()
                 if show:
@@ -160,3 +167,9 @@ while True:
         #
         # fps = 1 / offset
         # # print(fps)
+    else:
+        # 打印游戏结束的文字
+        window.blit(text, (WIDTH / 2 - 100, HEIGHT / 2))
+        pygame.display.flip()
+        # print('游戏结束')
+        continue

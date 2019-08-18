@@ -6,7 +6,7 @@ from view.brick import Brick
 from view.water import Water
 from view.enemyTank import EnemyTank
 from view.home import Home
-
+from view.smallbrick import SmallBrick
 
 
 def Map(views,window):
@@ -27,6 +27,9 @@ def Map(views,window):
                 views.append(Brick(x=SIZE * line, y=SIZE * row, window=window))
             elif fileList[row][line] == '堡':
                 views.append(Home(x=SIZE * line, y=SIZE * row, window=window))
+            # elif fileList[row][line] == '小':
+            #     # views.append(SmallBrick(x=SIZE * line, y=SIZE * row, window=window))
+            #     views.append(SmallBrick(x=SIZE * line+30, y=SIZE * row+30, window=window))
             elif fileList[row][line] == '敌':
                 views.append(EnemyTank(x=SIZE * line, y=SIZE * row, window=window,direction=Direction.DOWN))
     # 对views进行排序，以便能够使坦克隐藏在草丛

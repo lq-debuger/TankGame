@@ -14,6 +14,15 @@ from base.suffer import SufferAble
 from view.boom import Boom
 from base.move import MoveAble
 from base.block import BlockAble
+from enum import Enum
+
+
+# class Loc(Enum):
+#     LOC1 = 0
+#     LOC2 = 1
+#     LOC3 = 2
+#     LOC4 = 3
+
 
 class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAble):
     """
@@ -144,3 +153,20 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAbl
 
     def notifyCollision(self):
         self.coll = True
+
+    # 死后重置，不进行销毁
+    def reset(self):
+        l = random.randint(0,3)
+        if l == 0:
+            self.x = 0
+            self.y = 0
+        elif l == 1:
+            self.x = 12* SIZE
+            self.y = 0
+        elif l == 2:
+            self.y = 6 * SIZE
+            self.x = 0
+        elif l == 3:
+            self.x = 12* SIZE
+            self.y = 6 * SIZE
+
