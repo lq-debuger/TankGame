@@ -14,7 +14,8 @@ def Map(views,window):
     f = open('./map/1.map', encoding='utf-8')
     fileList = f.readlines()
     for row in range(0, len(fileList)):
-        for line in range(0, len(fileList)):
+        lineStr = fileList[row]
+        for line in range(0, len(lineStr)):
             if fileList[row][line] == '主':
                 views.append(Tank(x=SIZE * line, y=SIZE * row, window=window,direction = Direction.UP))
             elif fileList[row][line] == '草':

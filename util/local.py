@@ -2,7 +2,7 @@ from pygame.locals import *
 from enum import Enum
 
 SIZE = 60
-WIDTH = 13*60
+WIDTH = 14*60
 HEIGHT = 13*60
 
 class Direction(Enum):

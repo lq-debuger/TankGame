@@ -155,18 +155,20 @@ class EnemyTank(Views,AutoMove,MoveAble,AutoFire,DestroyAble,SufferAble,BlockAbl
         self.coll = True
 
     # 死后重置，不进行销毁
-    def reset(self):
-        l = random.randint(0,3)
+    def reset(self,enemyList,views):
+        l = random.randint(0,2)
         if l == 0:
             self.x = 0
             self.y = 0
         elif l == 1:
-            self.x = 12* SIZE
+            self.x = 6* SIZE
             self.y = 0
         elif l == 2:
-            self.y = 6 * SIZE
-            self.x = 0
-        elif l == 3:
-            self.x = 12* SIZE
-            self.y = 6 * SIZE
+            self.x = 13 * SIZE
+            self.y = 0
+        for enemy in enemyList:
+            if enemy.x == self.x and enemy.y == self.y:
+                self.reset(enemyList)
+        return views.append(EnemyTank(x=self.x, y=self.y, window=self.window,direction=Direction.DOWN))
+
 

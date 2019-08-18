@@ -15,11 +15,13 @@ from view.home import Home
 from util.gameover import *
 import time
 from view.bullet import *
+from PyQt5.QtWidgets import QPushButton
+from util.local import *
 
 # 初始化游戏界面
 pygame.init()
 # 创建游戏窗口
-window = pygame.display.set_mode((13*SIZE,13*SIZE))
+window = pygame.display.set_mode((WIDTH,13*SIZE))
 # 设置标题
 pygame.display.set_caption("坦克大战")
 # 加载游戏图标
@@ -35,6 +37,8 @@ Map(views,window)
 tank = list(filter(lambda view:isinstance(view,Tank),views))[0]
 # 获取老巢
 home = list(filter(lambda view:isinstance(view,Home),views))[0]
+# 获取敌方坦克列表
+enemyList = list(filter(lambda view:isinstance(view,Home),views))
 
 # 创建游戏结束的文字
 font = pygame.font.Font('./font/happy.ttf', 60)
@@ -86,16 +90,20 @@ while True:
         # 判断是否要进行摧毁
         for destroyView in destroyList:
             if destroyView.needDestroy():
-                # if isinstance(destroyView,EnemyTank):
-                #     destroyView.reset()
-                #     continue
                 # 判断是都需要挂掉的特效
                 show = destroyView.showBoom()
                 if show:
                     views.append(show)
                 views.remove(destroyView)
-
+                if isinstance(destroyView,EnemyTank):
+                    destroyView.reset(enemyList,views)
+                    continue
                 del destroyView
+                # 判断敌机是否需要重置
+
+                # if isinstance(destroyView,EnemyTank):
+                #     destroyView.reset(enemyList,views)
+                #     continue
 
         # 检测所有自动移动的控件
         autoList = list(filter(lambda view:isinstance(view,AutoMove),views))
@@ -158,6 +166,8 @@ while True:
     else:
         # 打印游戏结束的文字
         window.fill((0,0,0))
+        # pygame.Color.b
         window.blit(text, (WIDTH / 2- 160, HEIGHT / 2))
+        # restart()
         pygame.display.flip()
         continue
